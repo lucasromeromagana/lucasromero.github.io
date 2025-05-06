@@ -4371,5 +4371,15 @@
     margin-right: 4px;
   }
 }
+/* Oculta el hueco vacío del CTA principal */
+.c-hero__btn a.c-button--primary {
+  display: none !important;
+  margin-left: 0 !important;
+}
+
+/* Alinea el botón secundario a la izquierda */
+.c-hero__btn {
+  justify-content: flex-start !important;
+}
 
 /*# sourceMappingURL=main.css.map */
