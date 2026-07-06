@@ -1,1 +1,4 @@
-Sitemap: /sitemap.xml
+User-agent: *
+Allow: /
+
+Sitemap: https://lucasromeromagana.github.io/sitemap.xml

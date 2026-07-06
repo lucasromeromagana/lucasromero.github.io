@@ -5,367 +5,641 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
 
-  <title>Lucas Romero</title>
-  <meta name='description' content='iOS Developer Portfolio'>
+  <title>Lucas Romero — iOS Developer</title>
+  <meta name="description" content="Lucas Romero — iOS Developer based in Madrid. SwiftUI, UIKit, Combine & MVVM. Building elegant, secure and high-performance apps for banking, crypto and e-commerce.">
 
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="https://lucasromeromagana.github.io/">
+  <link rel="icon" href="favicon.ico">
 
-  <!-- Twitter Card -->
+  <!-- Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lucas Romero — iOS Developer">
+  <meta property="og:description" content="iOS Developer based in Madrid. SwiftUI · UIKit · Combine · MVVM. Banking, crypto & e-commerce apps.">
+  <meta property="og:image" content="https://lucasromeromagana.github.io/images/01.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lucas Romero">
-  <meta name="twitter:description" content="iOS Developer Portfolio">
-  <meta name="twitter:image:src" content="/images/01.jpg">
+  <meta name="twitter:title" content="Lucas Romero — iOS Developer">
+  <meta name="twitter:description" content="iOS Developer based in Madrid. SwiftUI · UIKit · Combine · MVVM.">
+  <meta name="twitter:image" content="https://lucasromeromagana.github.io/images/01.jpg">
 
-  <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Lucas Romero">
-  <meta property="og:description" content="iOS Developer Portfolio">
-  <meta property="og:image" content="/images/01.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --bg-soft: #0a0a0c;
+      --surface: rgba(255, 255, 255, 0.045);
+      --surface-strong: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.10);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text: #f5f5f7;
+      --text-dim: #a1a1aa;
+      --text-faint: #6b6b73;
+      --blue: #0a84ff;
+      --purple: #bf5af2;
+      --pink: #ff375f;
+      --teal: #64d2ff;
+      --green: #30d158;
+      --radius: 22px;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    }
 
-  <!-- Ionicons -->
-  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <link rel="stylesheet" href="/assets/main.css">
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background glow */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(60% 55% at 15% 0%, rgba(10, 132, 255, 0.16), transparent 60%),
+        radial-gradient(55% 50% at 90% 10%, rgba(191, 90, 242, 0.14), transparent 60%),
+        radial-gradient(60% 60% at 50% 100%, rgba(255, 55, 95, 0.08), transparent 70%),
+        var(--bg);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+    }
+
+    .wrap { width: min(1180px, 92vw); margin: 0 auto; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s ease, background .3s ease;
+    }
+    .nav.scrolled { border-bottom-color: var(--border); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 800; letter-spacing: -0.02em; font-size: 1.05rem; display: flex; align-items: center; gap: 9px; }
+    .brand .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
+    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-links a { color: var(--text-dim); font-size: 0.92rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+
+    .lang-toggle {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px;
+      background: var(--surface);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .lang-toggle button {
+      border: none; background: transparent; color: var(--text-faint);
+      padding: 4px 11px; border-radius: 999px; cursor: pointer; font: inherit;
+      transition: all .2s;
+    }
+    .lang-toggle button.active { background: var(--text); color: #000; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 999px;
+      font-weight: 600; font-size: 0.92rem; cursor: pointer;
+      border: 1px solid transparent; transition: transform .2s ease, box-shadow .2s ease, background .2s;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 30px rgba(10,132,255,.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(10,132,255,.5); }
+    .btn-ghost { background: var(--surface); border-color: var(--border); color: var(--text); }
+    .btn-ghost:hover { background: var(--surface-strong); transform: translateY(-2px); }
+
+    .menu-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; }
+
+    /* ---------- HERO ---------- */
+    .hero { padding: 190px 0 90px; position: relative; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--border);
+      font-size: 0.8rem; font-weight: 600; color: var(--text-dim); margin-bottom: 26px;
+    }
+    .eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(48,209,88,.6); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(48,209,88,.55)} 70%{box-shadow:0 0 0 9px rgba(48,209,88,0)} 100%{box-shadow:0 0 0 0 rgba(48,209,88,0)} }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; margin-bottom: 22px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(110deg, var(--teal), var(--blue) 40%, var(--purple) 80%, var(--pink));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.lead { font-size: 1.14rem; color: var(--text-dim); max-width: 33ch; margin-bottom: 34px; }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-stats { display: flex; gap: 34px; flex-wrap: wrap; }
+    .stat .num { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; }
+    .stat .lbl { font-size: 0.82rem; color: var(--text-faint); }
+
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .hero-card {
+      position: relative; width: 100%; max-width: 340px; aspect-ratio: 3/4;
+      border-radius: 30px; overflow: hidden;
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 40px 90px rgba(0,0,0,.6);
+    }
+    .hero-card img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.05); }
+    .hero-card::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55));
+    }
+    .float-chip {
+      position: absolute; z-index: 3;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 15px; border-radius: 16px;
+      background: rgba(20,20,24,.72); backdrop-filter: blur(14px);
+      border: 1px solid var(--border-strong);
+      font-size: 0.82rem; font-weight: 600;
+      box-shadow: 0 14px 40px rgba(0,0,0,.5);
+    }
+    .float-chip .ic { font-size: 1rem; }
+    .chip-swift { top: 40px; left: -26px; animation: floaty 5s ease-in-out infinite; }
+    .chip-arch { bottom: 70px; right: -30px; animation: floaty 6s ease-in-out infinite 1s; }
+    .chip-star { bottom: -14px; left: 30px; animation: floaty 5.5s ease-in-out infinite .5s; }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+    /* ---------- MARQUEE ---------- */
+    .marquee { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; overflow: hidden; margin-top: 30px; }
+    .marquee-track { display: flex; gap: 56px; width: max-content; animation: scroll 26s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee span { font-size: 1rem; font-weight: 600; color: var(--text-faint); white-space: nowrap; display: inline-flex; align-items: center; gap: 12px; }
+    .marquee span::before { content: "✦"; color: var(--blue); font-size: .7rem; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* ---------- SECTIONS ---------- */
+    section.block { padding: 100px 0; }
+    .sec-head { margin-bottom: 50px; max-width: 640px; }
+    .sec-tag { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+    .sec-head h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em; font-weight: 800; line-height: 1.05; margin-bottom: 16px; }
+    .sec-head p { color: var(--text-dim); font-size: 1.06rem; }
+
+    /* ---------- PROJECTS ---------- */
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+    .project {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      transition: transform .4s cubic-bezier(.2,.7,.2,1), border-color .4s, box-shadow .4s;
+    }
+    .project:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: 0 30px 70px rgba(0,0,0,.5); }
+    .project.wide { grid-column: span 2; }
+    .project-media { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+    .project.wide .project-media { aspect-ratio: 21/9; }
+    .project-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+    .project:hover .project-media img { transform: scale(1.05); }
+    .project-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(5,5,7,.85)); }
+    .project-tags { position: absolute; top: 16px; left: 16px; z-index: 2; display: flex; gap: 7px; flex-wrap: wrap; }
+    .ptag {
+      font-size: 0.72rem; font-weight: 600; padding: 5px 11px; border-radius: 999px;
+      background: rgba(10,10,12,.6); backdrop-filter: blur(10px);
+      border: 1px solid var(--border-strong); color: var(--text);
+    }
+    .ptag.swiftui { color: var(--teal); border-color: rgba(100,210,255,.35); }
+    .ptag.uikit { color: var(--purple); border-color: rgba(191,90,242,.35); }
+    .ptag.live { color: var(--green); border-color: rgba(48,209,88,.4); }
+    .project-body { padding: 22px 24px 26px; position: relative; z-index: 2; margin-top: -60px; }
+    .project-body .kicker { font-size: 0.82rem; color: var(--text-faint); font-weight: 600; }
+    .project-body h3 { font-size: 1.5rem; letter-spacing: -0.02em; font-weight: 700; margin: 2px 0 12px; }
+    .project-body p { color: var(--text-dim); font-size: 0.96rem; }
+    .project.wide .project-body { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; align-items: start; }
+    .project.wide .project-body .txt { grid-column: 1; }
+    .project.wide .project-body .feat { grid-column: 2; margin-top: 6px; display: flex; flex-direction: column; gap: 9px; }
+    .feat .fi { display: flex; gap: 10px; align-items: flex-start; font-size: 0.9rem; color: var(--text-dim); }
+    .feat .fi::before { content: ""; margin-top: 8px; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+
+    /* ---------- ABOUT ---------- */
+    .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: center; }
+    .about-photo { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); aspect-ratio: 4/5; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-text p { color: var(--text-dim); font-size: 1.06rem; margin-bottom: 18px; }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+
+    .skills { margin-top: 34px; display: grid; gap: 20px; }
+    .skill-group h4 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+    .chip {
+      font-size: 0.86rem; font-weight: 500; padding: 8px 14px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border); color: var(--text);
+      transition: all .2s;
+    }
+    .chip:hover { background: var(--surface-strong); border-color: var(--border-strong); transform: translateY(-2px); }
+
+    /* ---------- CONTACT ---------- */
+    .contact-card {
+      position: relative; border-radius: 32px; overflow: hidden;
+      padding: 70px 40px; text-align: center;
+      background:
+        radial-gradient(80% 120% at 50% 0%, rgba(10,132,255,.25), transparent 60%),
+        radial-gradient(60% 120% at 90% 100%, rgba(191,90,242,.22), transparent 60%),
+        var(--surface);
+      border: 1px solid var(--border-strong);
+    }
+    .contact-card h2 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -0.03em; font-weight: 800; margin-bottom: 16px; line-height: 1.05; }
+    .contact-card p { color: var(--text-dim); font-size: 1.1rem; max-width: 46ch; margin: 0 auto 34px; }
+    .contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ---------- FOOTER ---------- */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; }
+    footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer .fnav { display: flex; gap: 24px; }
+    footer a { color: var(--text-faint); font-size: 0.9rem; transition: color .2s; }
+    footer a:hover { color: var(--text); }
+    .copy { color: var(--text-faint); font-size: 0.88rem; }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Language visibility */
+    [data-lang="es"] .en-only { display: none; }
+    [data-lang="en"] .es-only { display: none; }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 50px; }
+      .hero-visual { order: -1; }
+      .hero p.lead { max-width: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 34px; }
+      .about-photo { max-width: 380px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project.wide { grid-column: span 1; }
+      .project.wide .project-media { aspect-ratio: 16/10; }
+      .project.wide .project-body { grid-template-columns: 1fr; }
+      .project.wide .project-body .feat { grid-column: 1; }
+      .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute; top: 64px; right: 4vw;
+        background: rgba(12,12,14,.96); backdrop-filter: blur(20px);
+        border: 1px solid var(--border); border-radius: 18px; padding: 18px 22px; gap: 16px;
+      }
+    }
+    @media (max-width: 560px) {
+      .hero { padding: 150px 0 60px; }
+      section.block { padding: 70px 0; }
+      .contact-card { padding: 50px 24px; }
+      .hero-stats { gap: 24px; }
+      .float-chip { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 
-<body>
+<body data-lang="en">
 
-    
+  <!-- ===== NAV ===== -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a href="#top" class="brand"><span class="dot"></span>Lucas Romero</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#work" data-en="Work" data-es="Proyectos">Work</a>
+        <a href="#about" data-en="About" data-es="Sobre mí">About</a>
+        <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button data-set-lang="en" class="active">EN</button>
+          <button data-set-lang="es">ES</button>
+        </div>
+        <a href="#contact" class="btn btn-primary" style="padding:9px 16px" data-en="Let's talk" data-es="Hablemos">Let's talk</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
 
-    <!-- begin header -->
-<header class="c-header">
-  <div class="container">
-    <div class="row">
-      <div class="c-header__inner">
+  <span id="top"></span>
 
-        <div class="logo">
-          <a class="logo__link" href="/">
-          
-            
-          
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow"><span class="pulse"></span><span data-en="Available for new opportunities" data-es="Disponible para nuevas oportunidades">Available for new opportunities</span></span>
+          <h1>
+            <span data-en="iOS Developer" data-es="Desarrollador iOS">iOS Developer</span><br>
+            <span data-en="crafting apps that" data-es="creando apps que">crafting apps that</span>
+            <span class="grad" data-en="feel like magic." data-es="parecen magia.">feel like magic.</span>
+          </h1>
+          <p class="lead">
+            <span data-en="I'm Lucas — based in Madrid, I turn ideas into elegant, secure and high-performance iOS apps with SwiftUI, UIKit and Combine." data-es="Soy Lucas — desde Madrid, convierto ideas en apps iOS elegantes, seguras y de alto rendimiento con SwiftUI, UIKit y Combine.">I'm Lucas — based in Madrid, I turn ideas into elegant, secure and high-performance iOS apps with SwiftUI, UIKit and Combine.</span>
+          </p>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary" data-en="See my work" data-es="Ver mi trabajo">See my work</a>
+            <a href="#contact" class="btn btn-ghost" data-en="Get in touch" data-es="Contáctame">Get in touch</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><div class="num">3+</div><div class="lbl" data-en="Years shipping iOS" data-es="Años enviando iOS">Years shipping iOS</div></div>
+            <div class="stat"><div class="num">6</div><div class="lbl" data-en="Production apps" data-es="Apps en producción">Production apps</div></div>
+            <div class="stat"><div class="num">30%</div><div class="lbl" data-en="Fewer regressions" data-es="Menos regresiones">Fewer regressions</div></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-card">
+            <img src="images/01.jpg" alt="Lucas Romero" loading="eager">
+          </div>
+          <span class="float-chip chip-swift"><span class="ic">🦅</span> SwiftUI</span>
+          <span class="float-chip chip-arch"><span class="ic">🧩</span> MVVM + Clean</span>
+          <span class="float-chip chip-star"><span class="ic">✨</span> <span data-en="Pixel-perfect" data-es="Píxel perfecto">Pixel-perfect</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- tech marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>SwiftUI</span><span>UIKit</span><span>Combine</span><span>MVVM</span><span>Clean Architecture</span><span>Core Data</span><span>Face ID</span><span>XCTest</span><span>Snapshot Testing</span><span>Apple Pay</span><span>SEPA / SWIFT</span><span>WKWebView</span>
+        <span>SwiftUI</span><span>UIKit</span><span>Combine</span><span>MVVM</span><span>Clean Architecture</span><span>Core Data</span><span>Face ID</span><span>XCTest</span><span>Snapshot Testing</span><span>Apple Pay</span><span>SEPA / SWIFT</span><span>WKWebView</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== WORK ===== -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag" data-en="Selected work" data-es="Trabajo seleccionado">Selected work</div>
+        <h2 data-en="Apps built to the highest standard." data-es="Apps construidas al máximo nivel.">Apps built to the highest standard.</h2>
+        <p data-en="Banking, crypto and e-commerce apps trusted by real users across Europe — engineered with clean architecture and tested end to end." data-es="Apps de banca, cripto y e-commerce usadas por usuarios reales en toda Europa — con arquitectura limpia y testeadas de principio a fin.">Banking, crypto and e-commerce apps trusted by real users across Europe — engineered with clean architecture and tested end to end.</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- ikigii / Towerbank (wide, featured — Loans module tech lead) -->
+        <article class="project wide reveal">
+          <div class="project-media">
+            <div class="project-tags">
+              <span class="ptag live" data-en="★ Loans module — sole iOS engineer" data-es="★ Módulo de Loans — único ingeniero iOS">★ Loans module — sole iOS engineer</span>
+              <span class="ptag swiftui">SwiftUI</span>
+              <span class="ptag">Combine</span>
+              <span class="ptag">MVVM</span>
+              <span class="ptag" data-en="App Store" data-es="App Store">App Store</span>
+            </div>
+            <img src="images/ikigii-mockup.jpg" alt="ikigii — Towerbank crypto banking app" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="txt">
+              <div class="kicker">Towerbank · ikigii — <span data-en="Crypto banking app" data-es="App de banca cripto">Crypto banking app</span></div>
+              <h3 data-en="ikigii — I owned the entire Loans module" data-es="ikigii — dueño del módulo de Loans completo">ikigii — I owned the entire Loans module</h3>
+              <p data-en="As the only iOS engineer on the project, I built the complete Loans module from architecture to App Store release — requests, cancellations, renewals, collateral management and crypto buy/sell flows — and my MVVM + Combine architecture became the reference pattern for the rest of the app." data-es="Como único ingeniero iOS del proyecto, construí el módulo de Loans completo, desde la arquitectura hasta la publicación en App Store — solicitudes, cancelaciones, renovaciones, gestión de colateral y flujos de compra/venta de cripto — y mi arquitectura MVVM + Combine se convirtió en el patrón de referencia del resto de la app.">As the only iOS engineer on the project, I built the complete Loans module from architecture to App Store release — requests, cancellations, renewals, collateral management and crypto buy/sell flows — and my MVVM + Combine architecture became the reference pattern for the rest of the app.</p>
+            </div>
+            <div class="feat">
+              <div class="fi" data-en="Sole iOS decision-maker: defined the architecture, conventions & docs" data-es="Único responsable iOS: definí la arquitectura, convenciones y documentación">Sole iOS decision-maker: defined the architecture, conventions & docs</div>
+              <div class="fi" data-en="Real-time crypto transaction state via Combine pipelines" data-es="Estado de transacciones cripto en tiempo real con pipelines de Combine">Real-time crypto transaction state via Combine pipelines</div>
+              <div class="fi" data-en="Negotiated the API contract with backend; full XCTest coverage, zero critical bugs post-launch" data-es="Negocié el contrato de API con backend; cobertura total con XCTest, cero bugs críticos tras el lanzamiento">Negotiated the API contract with backend; full XCTest coverage, zero critical bugs post-launch</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pibank -->
+        <article class="project reveal">
+          <div class="project-media">
+            <div class="project-tags">
+              <span class="ptag swiftui">SwiftUI</span>
+              <span class="ptag">Combine</span>
+              <span class="ptag">Clean Architecture</span>
+            </div>
+            <img src="images/pibank-mockup.jpg" alt="Pibank" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="kicker">Banco Pichincha España</div>
+            <h3>Pibank</h3>
+            <p data-en="A digital bank for Spain built entirely in SwiftUI — fast, secure and scalable, with an MVVM + use-case architecture, real-time SEPA transfers, card controls and full unit, snapshot and integration test coverage." data-es="Un banco digital para España construido íntegramente en SwiftUI — rápido, seguro y escalable, con arquitectura MVVM + use-cases, transferencias SEPA en tiempo real, control de tarjetas y cobertura completa de tests unitarios, snapshot e integración.">A digital bank for Spain built entirely in SwiftUI — fast, secure and scalable, with an MVVM + use-case architecture, real-time SEPA transfers, card controls and full unit, snapshot and integration test coverage.</p>
+          </div>
+        </article>
+
+        <!-- Sentua -->
+        <article class="project reveal">
+          <div class="project-media">
+            <div class="project-tags">
+              <span class="ptag swiftui">SwiftUI</span>
+              <span class="ptag">WKWebView</span>
+              <span class="ptag">Apple Pay</span>
+            </div>
+            <img src="images/perfumerias-mockup.jpg" alt="Sentua" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="kicker" data-en="Beauty e-commerce" data-es="E-commerce de belleza">Beauty e-commerce</div>
+            <h3>Sentua</h3>
+            <p data-en="A fully native SwiftUI cosmetics & perfume store with animated product grids, smart search, Apple Pay checkout and advanced WKWebView bridging for dynamic web content." data-es="Una tienda nativa de cosmética y perfumes en SwiftUI con grids animados, búsqueda inteligente, pago con Apple Pay y una integración avanzada de WKWebView para contenido web dinámico.">A fully native SwiftUI cosmetics & perfume store with animated product grids, smart search, Apple Pay checkout and advanced WKWebView bridging for dynamic web content.</p>
+          </div>
+        </article>
+
+        <!-- Santander Germany -->
+        <article class="project reveal">
+          <div class="project-media">
+            <div class="project-tags">
+              <span class="ptag uikit">UIKit</span>
+              <span class="ptag">Combine</span>
+            </div>
+            <img src="images/germany-mockup.jpg" alt="Santander Consumer Bank Germany" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="kicker">Suresse Direkt Bank · 🇩🇪</div>
+            <h3 data-en="Santander CB Germany" data-es="Santander CB Alemania">Santander CB Germany</h3>
+            <p data-en="Native UIKit mobile banking with Face ID login, real-time transfers, an interest calculator and PDF statement exports — clean MVVM with a Combine-driven use-case layer." data-es="Banca móvil nativa en UIKit con acceso Face ID, transferencias en tiempo real, simulador de intereses y exportación de extractos en PDF — MVVM limpio con capa de use-cases sobre Combine.">Native UIKit mobile banking with Face ID login, real-time transfers, an interest calculator and PDF statement exports — clean MVVM with a Combine-driven use-case layer.</p>
+          </div>
+        </article>
+
+        <!-- Santander Belgium -->
+        <article class="project reveal">
+          <div class="project-media">
+            <div class="project-tags">
+              <span class="ptag uikit">UIKit</span>
+              <span class="ptag">Core Data</span>
+            </div>
+            <img src="images/belgium-mockup.jpg" alt="Santander Consumer Bank Belgium" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="kicker">Banco Santander · 🇧🇪</div>
+            <h3 data-en="Santander CB Belgium" data-es="Santander CB Bélgica">Santander CB Belgium</h3>
+            <p data-en="The Belgian branch's savings app: SEPA transfers, account opening and an interest simulator, with Core Data caching and background prefetching for offline access — all covered by unit, snapshot and UI tests." data-es="La app de ahorro de la sucursal belga: transferencias SEPA, apertura de cuentas y simulador de intereses, con caché en Core Data y prefetch en segundo plano para acceso offline — todo cubierto por tests unitarios, snapshot y de UI.">The Belgian branch's savings app: SEPA transfers, account opening and an interest simulator, with Core Data caching and offline access — covered by unit, snapshot and UI tests.</p>
+          </div>
+        </article>
+
+        <!-- Manor (wide) -->
+        <article class="project wide reveal">
+          <div class="project-media">
+            <div class="project-tags">
+              <span class="ptag swiftui">SwiftUI</span>
+              <span class="ptag">Combine</span>
+              <span class="ptag">XCUITest</span>
+              <span class="ptag" data-en="Navigation" data-es="Navegación">Navigation</span>
+            </div>
+            <img src="images/manor-mockup.jpg" alt="Manor" loading="lazy">
+          </div>
+          <div class="project-body">
+            <div class="txt">
+              <div class="kicker" data-en="Switzerland's largest retail platform · Since 1902" data-es="La mayor plataforma retail de Suiza · Desde 1902">Switzerland's largest retail platform · Since 1902</div>
+              <h3>Manor</h3>
+              <p data-en="For Manor AG's flagship e-commerce app, I built the full category-navigation system — SwiftUI-native menus, deep-link routing and a multi-level navigation architecture — bringing 61+ Swiss stores into a single, fluid shopping experience." data-es="Para la app insignia de e-commerce de Manor AG construí el sistema completo de navegación por categorías — menús nativos en SwiftUI, deep-link routing y una arquitectura de navegación multinivel — llevando más de 61 tiendas suizas a una experiencia de compra fluida.">For Manor AG's flagship e-commerce app, I built the full category-navigation system — SwiftUI-native menus, deep-link routing and a multi-level navigation architecture — bringing 61+ Swiss stores into a single, fluid shopping experience.</p>
+            </div>
+            <div class="feat">
+              <div class="fi" data-en="Owned the category-navigation system: menus, deep links & routing" data-es="Dueño del sistema de navegación por categorías: menús, deep links y routing">Owned the category-navigation system: menus, deep links & routing</div>
+              <div class="fi" data-en="Drove test automation (XCTest + XCUITest) that cut regressions by 30%" data-es="Impulsé la automatización de tests (XCTest + XCUITest) que redujo las regresiones un 30%">Drove test automation (XCTest + XCUITest) that cut regressions by 30%</div>
+              <div class="fi" data-en="Built reusable UI components adopted across multiple squads" data-es="Componentes de UI reutilizables adoptados por varios equipos">Built reusable UI components adopted across multiple squads</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag" data-en="About" data-es="Sobre mí">About</div>
+        <h2 data-en="Obsessed with the details users never notice — until they're gone." data-es="Obsesionado con los detalles que nadie nota — hasta que faltan.">Obsessed with the details users never notice — until they're gone.</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-photo reveal">
+          <img src="images/avatar.jpg" alt="Lucas Romero" loading="lazy">
+        </div>
+        <div class="about-text reveal">
+          <p data-en="I'm a Mid iOS Engineer at VASS Consulting in Madrid, with 3+ years shipping production apps for demanding domains — banking, crypto and retail — where security, reliability and polish aren't optional. On Towerbank I was the sole iOS engineer behind the entire Loans module, from architecture to App Store." data-es="Soy Mid iOS Engineer en VASS Consulting (Madrid), con más de 3 años enviando apps a producción en sectores exigentes — banca, cripto y retail — donde la seguridad, la fiabilidad y el acabado no son negociables. En Towerbank fui el único ingeniero iOS detrás del módulo de Loans completo, desde la arquitectura hasta la App Store.">I'm a Mid iOS Engineer at VASS Consulting in Madrid, with 3+ years shipping production apps for demanding domains — banking, crypto and retail — where security, reliability and polish aren't optional. On Towerbank I was the sole iOS engineer behind the entire Loans module, from architecture to App Store.</p>
+          <p data-en="I build with SwiftUI and UIKit on a foundation of clean, testable architecture: MVVM with a dedicated use-case layer, Combine and Swift Concurrency for reactive data flows, and dependency injection that keeps everything mockable. I designed a test-automation suite that cut regressions by 30% and modular UI components adopted across multiple squads." data-es="Construyo con SwiftUI y UIKit sobre una base de arquitectura limpia y testeable: MVVM con capa de use-cases dedicada, Combine y Swift Concurrency para flujos reactivos e inyección de dependencias que lo mantiene todo mockeable. Diseñé una suite de automatización de tests que redujo las regresiones un 30% y componentes de UI modulares adoptados por varios equipos.">I build with SwiftUI and UIKit on a foundation of clean, testable architecture: MVVM with a dedicated use-case layer, Combine and Swift Concurrency for reactive data flows, and dependency injection that keeps everything mockable. I designed a test-automation suite that cut regressions by 30% and modular UI components adopted across multiple squads.</p>
+          <p data-en="What drives me is the craft — smooth animations, pixel-perfect layouts and code that stays a joy to work in as it scales." data-es="Lo que me mueve es el oficio — animaciones fluidas, interfaces al píxel y código que sigue siendo un placer mantener a medida que crece.">What drives me is the craft — smooth animations, pixel-perfect layouts and code that stays a joy to work in as it scales.</p>
+
+          <div class="skills">
+            <div class="skill-group">
+              <h4 data-en="Languages & UI" data-es="Lenguajes y UI">Languages & UI</h4>
+              <div class="chips">
+                <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">UIKit</span><span class="chip">Combine</span><span class="chip">Swift Concurrency</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4 data-en="Architecture & Quality" data-es="Arquitectura y calidad">Architecture & Quality</h4>
+              <div class="chips">
+                <span class="chip">MVVM</span><span class="chip">Clean Architecture</span><span class="chip">Use Cases</span><span class="chip">Dependency Injection</span><span class="chip">XCTest</span><span class="chip">Snapshot Testing</span><span class="chip">UI Testing</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4 data-en="Platform & Tools" data-es="Plataforma y herramientas">Platform & Tools</h4>
+              <div class="chips">
+                <span class="chip">Core Data</span><span class="chip">URLSession</span><span class="chip">Face ID / Touch ID</span><span class="chip">Apple Pay</span><span class="chip">WKWebView</span><span class="chip">Git</span><span class="chip">CI/CD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="block" id="contact">
+    <div class="wrap">
+      <div class="contact-card reveal">
+        <h2 data-en="Let's build something great." data-es="Construyamos algo increíble.">Let's build something great.</h2>
+        <p data-en="Have a product in mind, a role to fill, or just want to talk iOS? My inbox is always open." data-es="¿Tienes un producto en mente, un puesto que cubrir o simplemente quieres hablar de iOS? Mi bandeja de entrada siempre está abierta.">Have a product in mind, a role to fill, or just want to talk iOS? My inbox is always open.</p>
+        <div class="contact-actions">
+          <a href="mailto:lukasitoyt@gmail.com" class="btn btn-primary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <span data-en="Email me" data-es="Escríbeme">Email me</span>
+          </a>
+          <a href="https://www.linkedin.com/in/lucas-romero-maga%C3%B1a-15a044214/" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn
           </a>
         </div>
-
-        <nav class="main-nav">
-          <div class="main-nav__box">
-
-            <div class="nav__icon-close">
-              <i class="ion ion-md-close"></i>
-            </div>
-
-            <div class="nav__title">Menu</div>
-
-              <ul class="nav__list list-reset">
-
-              
-                
-                <li class="nav__item">
-                  <a href="/" class="nav__link active-link">About Lucas</a>
-                </li>
-                
-              
-                
-                <li class="nav__item">
-                  <a href="/projects/" class="nav__link">Projects</a>
-                </li>
-                
-              
-
-            </ul>
-          </div>
-
-          <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
-<!--bookshop-live name(social-link.jekyll.html) params() context() -->
-
-<div class="social">
-  <ul class="social__list list-reset">
-    
-    <li class="social__item">
-      <a class="social__link" href="https://www.linkedin.com/in/lucas-romero-maga%C3%B1a-15a044214/?originalSubdomain=es" target="_blank" rel="noopener" aria-label="linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
-    </li>
-    
-  </ul>
-</div>
-
-<!--bookshop-live end-->
-        </nav>
-
-        <div class="nav-button">
-          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
-        </div>
-
       </div>
     </div>
-  </div>
-</header>
-<!-- end header -->
+  </section>
 
-    
-
-    <!--
-        Bookshop components are accessed using the bookshop tag,
-        using the same syntax as the standard Jekyll include tag.
-    -->
-    <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
-<!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
-
-<div class="c-page">
-
-
-    <!--bookshop-live name(hero/hero.jekyll.html) params(bind=block) context(block=content_blocks[0]) -->
-<!-- begin hero -->
-
-<section class="c-hero animate">
-  <div class="container">
-    <div class="row">
-      <div class="col col-12">
-        <div class="c-hero__inner">
-
-          <div class="c-hero__left">
-            <h1 class="c-hero__title">Hi there, I am Lucas Romero</h1>
-            <div class="c-hero__description"><p><strong>iOS Developer</strong> based in Madrid, turning creative ideas into
-  elegant, high-performance apps using <em>SwiftUI</em>, <em>Combine</em>, and
-  modern MVVM architecture. Passionate about pixel-perfect design, smooth animations,
-  and writing clean, scalable code that delights users worldwide.</p></div>
-            <div class="c-hero__btn">
-              <a href="" class="cta-button c-button c-button--primary c-button--small"></a>
-              <a class="works-button c-button c-button--secondary c-button--small" href="#projects">
-                <span class="circle-bg"><i class="ion ion-md-arrow-down button-arrow"></i></span> See my works
-              </a>
-            </div>
-          </div>
-
-          <div class="c-hero__right">
-            <div class="c-hero__image">
-              <img loading="lazy" src="/images/01.jpg" alt="">
-            </div>
-          </div>
-
-        </div>
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="wrap">
+      <a href="#top" class="brand"><span class="dot"></span>Lucas Romero</a>
+      <div class="fnav">
+        <a href="#work" data-en="Work" data-es="Proyectos">Work</a>
+        <a href="#about" data-en="About" data-es="Sobre mí">About</a>
+        <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+        <a href="https://www.linkedin.com/in/lucas-romero-maga%C3%B1a-15a044214/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
+      <div class="copy">© <span id="year"></span> Lucas Romero · <span data-en="Made in Madrid" data-es="Hecho en Madrid">Made in Madrid</span></div>
     </div>
-  </div>
-</section>
-<!-- end hero -->
-<!--bookshop-live end-->
+  </footer>
 
-    <!--bookshop-live name(projects-section/projects-section.jekyll.html) params(bind=block) context(block=content_blocks[1]) -->
-<!-- begin projects -->
-<section class="section projects" id="projects">
-  <div class="container">
-    <div class="row">
-      <div class="col col-12">
-        <div class="contaniner__inner animate">
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-          <div class="section__info">
-            <div class="section__head">
-              <h2 class="section__title">Latest Projects</h2>
-              <a class="section__link" href="/projects">View all <i class="ion ion-md-arrow-forward"></i></a>
-            </div>
-            <div class="section__description"><p>Dive into my portfolio and explore the heart of my passion for mobile development!</p></div>
-          </div>
+    // Language toggle
+    const body = document.body;
+    function applyLang(lang) {
+      body.dataset.lang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (val !== null) el.textContent = val;
+      });
+      document.querySelectorAll('.lang-toggle button').forEach(b =>
+        b.classList.toggle('active', b.dataset.setLang === lang));
+      try { localStorage.setItem('lr-lang', lang); } catch (e) {}
+    }
+    document.querySelectorAll('.lang-toggle button').forEach(b =>
+      b.addEventListener('click', () => applyLang(b.dataset.setLang)));
+    // Init: saved > browser > en
+    let initLang = 'en';
+    try { initLang = localStorage.getItem('lr-lang') || (navigator.language.startsWith('es') ? 'es' : 'en'); } catch (e) {}
+    applyLang(initLang);
 
-          
-          <div class="row">
-            
-              
-                <!--bookshop-live name(project-card/project-card.jekyll.html) params(project=project) context(project=site.projects[0]) -->
+    // Nav scrolled state
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
 
-<article class="c-project-card col col-4 col-d-6 col-t-12">
-  <div class="c-project-card__content">
-    <a href="/project/pibank" class="c-project-card__image">
-      <img loading="lazy" src="/images/pibank-mockup.jpg" alt="Pibank">
-    </a>
-    <div class="c-project-card__info">
-      <div class="c-project-card__info-wrap">
-        <h3 class="c-project-card__title">Pibank</h3>
-      </div>
-      <div class="c-project-card__info-wrap">
-        
-        <div class="c-project-card__subtitle">Pichincha Banking App</div>
-        
-      </div>
-    </div>
-  </div>
-</article>
-<!--bookshop-live end-->
-              
-            
-              
-                <!--bookshop-live name(project-card/project-card.jekyll.html) params(project=project) context(project=site.projects[1]) -->
+    // Mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-<article class="c-project-card col col-4 col-d-6 col-t-12">
-  <div class="c-project-card__content">
-    <a href="/project/manor" class="c-project-card__image">
-      <img loading="lazy" src="/images/manor-mockup.jpg" alt="Manor">
-    </a>
-    <div class="c-project-card__info">
-      <div class="c-project-card__info-wrap">
-        <h3 class="c-project-card__title">Manor</h3>
-      </div>
-      <div class="c-project-card__info-wrap">
-        
-        <div class="c-project-card__subtitle">Eccomerce App</div>
-        
-      </div>
-    </div>
-  </div>
-</article>
-<!--bookshop-live end-->
-              
-            
-              
-                <!--bookshop-live name(project-card/project-card.jekyll.html) params(project=project) context(project=site.projects[2]) -->
-
-<article class="c-project-card col col-4 col-d-6 col-t-12">
-  <div class="c-project-card__content">
-    <a href="/project/germany" class="c-project-card__image">
-      <img loading="lazy" src="/images/germany-mockup.jpg" alt="Santander Consumer Bank Germany">
-    </a>
-    <div class="c-project-card__info">
-      <div class="c-project-card__info-wrap">
-        <h3 class="c-project-card__title">Santander Consumer Bank Germany</h3>
-      </div>
-      <div class="c-project-card__info-wrap">
-        
-        <div class="c-project-card__subtitle">Suresse Direkt Bank App</div>
-        
-      </div>
-    </div>
-  </div>
-</article>
-<!--bookshop-live end-->
-              
-            
-              
-                <!--bookshop-live name(project-card/project-card.jekyll.html) params(project=project) context(project=site.projects[3]) -->
-
-<article class="c-project-card col col-4 col-d-6 col-t-12">
-  <div class="c-project-card__content">
-    <a href="/project/sentua" class="c-project-card__image">
-      <img loading="lazy" src="/images/perfumerias-mockup.jpg" alt="Sentua">
-    </a>
-    <div class="c-project-card__info">
-      <div class="c-project-card__info-wrap">
-        <h3 class="c-project-card__title">Sentua</h3>
-      </div>
-      <div class="c-project-card__info-wrap">
-        
-        <div class="c-project-card__subtitle">Eccomerce App</div>
-        
-      </div>
-    </div>
-  </div>
-</article>
-<!--bookshop-live end-->
-              
-            
-              
-                <!--bookshop-live name(project-card/project-card.jekyll.html) params(project=project) context(project=site.projects[4]) -->
-
-<article class="c-project-card col col-4 col-d-6 col-t-12">
-  <div class="c-project-card__content">
-    <a href="/project/belgium" class="c-project-card__image">
-      <img loading="lazy" src="/images/belgium-mockup.jpg" alt="Santander Consumer Bank">
-    </a>
-    <div class="c-project-card__info">
-      <div class="c-project-card__info-wrap">
-        <h3 class="c-project-card__title">Santander Consumer Bank</h3>
-      </div>
-      <div class="c-project-card__info-wrap">
-        
-        <div class="c-project-card__subtitle">Belgium</div>
-        
-      </div>
-    </div>
-  </div>
-</article>
-<!--bookshop-live end-->
-              
-            
-              
-                <!--bookshop-live name(project-card/project-card.jekyll.html) params(project=project) context(project=site.projects[5]) -->
-
-<article class="c-project-card col col-4 col-d-6 col-t-12">
-  <div class="c-project-card__content">
-    <a href="/project/ikigii" class="c-project-card__image">
-      <img loading="lazy" src="/images/ikigii-mockup.jpg" alt="ikigii">
-    </a>
-    <div class="c-project-card__info">
-      <div class="c-project-card__info-wrap">
-        <h3 class="c-project-card__title">ikigii</h3>
-      </div>
-      <div class="c-project-card__info-wrap">
-        
-        <div class="c-project-card__subtitle">TowerBank Crypto App</div>
-        
-      </div>
-    </div>
-  </div>
-</article>
-<!--bookshop-live end-->
-              
-            
-          </div>
-          
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end projects -->
-<!--bookshop-live end-->
-
-
-</div>
-
-<!--bookshop-live end-->
-
-    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
-
-    <!-- begin footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col col-12">
-
-        <!--bookshop-live meta(version="3.9.0" baseurl="" title="Vonge") -->
-<!--bookshop-live name(social-link.jekyll.html) params() context() -->
-
-<div class="social">
-  <ul class="social__list list-reset">
-    
-    <li class="social__item">
-      <a class="social__link" href="https://www.linkedin.com/in/lucas-romero-maga%C3%B1a-15a044214/?originalSubdomain=es" target="_blank" rel="noopener" aria-label="linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
-    </li>
-    
-  </ul>
-</div>
-
-<!--bookshop-live end-->
-
-        <ul class="footer_nav list-reset">
-          
-          <li class="footer_nav__item">
-            <a href="/" class="footer_nav__link">Home</a>
-          </li>
-          
-          <li class="footer_nav__item">
-            <a href="/projects/" class="footer_nav__link">Projects</a>
-          </li>
-          
-        </ul>
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- end footer -->
-
-    <script src="/js/scripts.js"></script>
-    <script src="/js/common.js"></script>
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
