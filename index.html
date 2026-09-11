@@ -138,7 +138,7 @@
     .menu-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; }
 
     /* ---------- HERO ---------- */
-    .hero { padding: 190px 0 90px; position: relative; }
+    .hero { padding: 190px 0 40px; position: relative; }
     .hero-grid {
       display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center;
     }
@@ -198,7 +198,10 @@
     .marquee:hover .marquee-track { animation-play-state: paused; }
     .marquee span { font-size: 1rem; font-weight: 600; color: var(--text-faint); white-space: nowrap; display: inline-flex; align-items: center; gap: 12px; }
     .marquee span::before { content: "✦"; color: var(--blue); font-size: .7rem; }
-    .social-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 44px; }
+    .social-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 48px; }
+    .social-row .btn { padding: 15px 30px; font-size: 1.05rem; gap: 10px; }
+    .social-row .btn svg { width: 20px; height: 20px; }
+    #work { padding-top: 44px; }
     @keyframes scroll { to { transform: translateX(-50%); } }
 
     /* ---------- SECTIONS ---------- */
@@ -311,7 +314,7 @@
       }
     }
     @media (max-width: 560px) {
-      .hero { padding: 150px 0 60px; }
+      .hero { padding: 150px 0 30px; }
       section.block { padding: 70px 0; }
       .contact-card { padding: 50px 24px; }
       .hero-stats { gap: 24px; }
