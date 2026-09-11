@@ -35,7 +35,7 @@
       --border-strong: rgba(255, 255, 255, 0.16);
       --text: #f5f5f7;
       --text-dim: #a1a1aa;
-      --text-faint: #6b6b73;
+      --text-faint: #8a8a92;
       --blue: #0a84ff;
       --purple: #bf5af2;
       --pink: #ff375f;
@@ -118,7 +118,7 @@
     }
     .lang-toggle button {
       border: none; background: transparent; color: var(--text-faint);
-      padding: 4px 11px; border-radius: 999px; cursor: pointer; font: inherit;
+      padding: 7px 13px; border-radius: 999px; cursor: pointer; font: inherit;
       transition: all .2s;
     }
     .lang-toggle button.active { background: var(--text); color: #000; }
@@ -126,7 +126,7 @@
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 11px 20px; border-radius: 999px;
-      font-weight: 600; font-size: 0.92rem; cursor: pointer;
+      font-weight: 700; font-size: 0.92rem; cursor: pointer;
       border: 1px solid transparent; transition: transform .2s ease, box-shadow .2s ease, background .2s;
       white-space: nowrap;
     }
@@ -238,7 +238,7 @@
     .project-body .kicker { font-size: 0.82rem; color: var(--text-faint); font-weight: 600; }
     .project-body h3 { font-size: 1.5rem; letter-spacing: -0.02em; font-weight: 700; margin: 2px 0 12px; }
     .project-body p { color: var(--text-dim); font-size: 0.96rem; }
-    .plink { display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; font-size: 0.88rem; font-weight: 600; color: var(--blue); text-decoration: none; }
+    .plink { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; padding-block: 6px; font-size: 0.88rem; font-weight: 600; color: var(--blue); text-decoration: none; }
     .plink:hover { text-decoration: underline; }
     .project.wide .project-body { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; align-items: start; }
     .project.wide .project-body .txt { grid-column: 1; }
@@ -254,7 +254,7 @@
     .about-text p strong { color: var(--text); font-weight: 600; }
 
     .skills { margin-top: 34px; display: grid; gap: 20px; }
-    .skill-group h4 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 12px; }
+    .skill-group h3 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 12px; }
     .chips { display: flex; flex-wrap: wrap; gap: 9px; }
     .chip {
       font-size: 0.86rem; font-weight: 500; padding: 8px 14px; border-radius: 12px;
@@ -325,6 +325,9 @@
       .reveal { opacity: 1; transform: none; }
     }
   </style>
+  <noscript>
+    <style>.reveal { opacity: 1; transform: none; }</style>
+  </noscript>
 </head>
 
 <body data-lang="en">
@@ -594,19 +597,19 @@
 
           <div class="skills">
             <div class="skill-group">
-              <h4 data-en="Languages & UI" data-es="Lenguajes y UI">Languages & UI</h4>
+              <h3 data-en="Languages & UI" data-es="Lenguajes y UI">Languages & UI</h3>
               <div class="chips">
                 <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">UIKit</span><span class="chip">Combine</span><span class="chip">Swift Concurrency</span>
               </div>
             </div>
             <div class="skill-group">
-              <h4 data-en="Architecture & Quality" data-es="Arquitectura y calidad">Architecture & Quality</h4>
+              <h3 data-en="Architecture & Quality" data-es="Arquitectura y calidad">Architecture & Quality</h3>
               <div class="chips">
                 <span class="chip">MVVM</span><span class="chip">Clean Architecture</span><span class="chip">Use Cases</span><span class="chip">Dependency Injection</span><span class="chip">XCTest</span><span class="chip">Snapshot Testing</span><span class="chip">UI Testing</span>
               </div>
             </div>
             <div class="skill-group">
-              <h4 data-en="Platform & Tools" data-es="Plataforma y herramientas">Platform & Tools</h4>
+              <h3 data-en="Platform & Tools" data-es="Plataforma y herramientas">Platform & Tools</h3>
               <div class="chips">
                 <span class="chip">Core Data</span><span class="chip">URLSession</span><span class="chip">Face ID / Touch ID</span><span class="chip">Apple Pay</span><span class="chip">WKWebView</span><span class="chip">Git</span><span class="chip">CI/CD</span>
               </div>
